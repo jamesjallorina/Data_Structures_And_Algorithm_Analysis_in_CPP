@@ -76,7 +76,7 @@ class Vector
 		int size( ) const
 		{ return theSize; }
 
-		int capcity( ) const 
+		int capacity( ) const 
 		{ return theCapacity; }
 
 		void push_back( const Object & x )
@@ -113,7 +113,7 @@ class Vector
 		{ return &objects[ 0 ]; }
 			
 		iterator end( )
-		{ return objects[ size() ]; } 
+		{ return &objects[ size() ]; } 
 
 		const_iterator end( ) const
 		{ return &objects[ size() ]; }
