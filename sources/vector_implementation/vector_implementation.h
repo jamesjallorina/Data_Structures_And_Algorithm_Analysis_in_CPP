@@ -1,15 +1,16 @@
+#ifndef VECTOR_H
+#define VECTOR_H
+
 #include <algorithm>
 
 template <typename Object>
 class Vector
 {
 	public:
-		explicit( init initSize = 0 ) : theSize{ initSize },
-			theCapacity{ initSize + SPARE_CAPACITY }
+		explicit Vector ( int initSize = 0 ) : theSize( initSize ), theCapacity( initSize + SPARE_CAPACITY )
 		{ objects = new Object[ theCapacity ]; }
 
-		Vector( const Vector & rhs ) : theSize{ rhs.theSize }, 
-			theCapacity{ rhs.theCapacity, objects{ nullptr }
+		Vector( const Vector & rhs ) : theSize( rhs.theSize ), theCapacity( rhs.theCapacity ), objects( nullptr )
 		{
 			objects = new Object[ theCapacity ];
 			for( int k = 0; k < theSize; ++k )
@@ -26,7 +27,7 @@ class Vector
 		~Vector()
 		{ delete [] objects; }
 
-		Vector( Vector && rhs ) : theSize{ rhs.theSize }, 
+		Vector( Vector && rhs ) : theSize( rhs.theSize ), 
 			theCapacity{ rhs.theCapacity }, objects{ rhs.objects }
 		{
 			rhs.objects = nullptr;
@@ -83,14 +84,14 @@ class Vector
 		{
 			if( theSize == theCapacity )
 				reserve( 2 * theCapacity + 1 );
-			Objects[ theSize++ ] = x;
+			objects[ theSize++ ] = x;
 		}
 
 		void push_back( Object && x )
 		{
 			if( theSize == theCapacity )
 				reserve( 2 * theCapacity + 1);
-			objets[ theSize++ ] = std::move( x );
+			objects[ theSize++ ] = std::move( x );
 		}
 
 		void pop_back( )
@@ -125,3 +126,5 @@ class Vector
 		int theCapacity;
 		Object * objects;
 };
+
+#endif //VECTOR_H
