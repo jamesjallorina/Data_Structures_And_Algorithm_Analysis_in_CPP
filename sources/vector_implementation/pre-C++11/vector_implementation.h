@@ -12,7 +12,7 @@ class Vector
 		/* default ctor */
 		Vector( int initSize = 0 ) : theSize( initSize ), 
 			theCapacity( initSize + SPARE_CAPACITY )
-		{ objects = NULL; }
+		{ objects = new Object[ theCapacity ]; }
 		
 		/* copy ctor */
 		Vector( const Vector & rhs ) : theSize( rhs.theSize ), theCapacity( rhs.theCapacity )
@@ -76,7 +76,7 @@ class Vector
 
 		void push_back( const Object & x )
 		{
-			if( theSize <= theCapacity )
+			if( theSize == theCapacity )
 				reserve( 2 * theCapacity + 1 );
 			objects[ theSize++ ] = x;	
 		}
