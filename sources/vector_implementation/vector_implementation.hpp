@@ -1,40 +1,44 @@
-#ifndef VECTOR_H
-#define VECTOR_H
+#ifndef vector_H
+#define vector_H
 
 #include <algorithm>
 
+namespace experimental {
+
 template <typename Object>
-class Vector
+class vector
 {
 	public:
-		explicit Vector ( int initSize = 0 ) : theSize{ initSize }, theCapacity{ initSize + SPARE_CAPACITY } 
+		explicit vector ( int initSize = 0 ) : theSize{ initSize }, 
+			theCapacity{ initSize + SPARE_CAPACITY } 
 		{ objects = new Object[ theCapacity ]; }
 
-		Vector( const Vector & rhs ) : theSize{ rhs.theSize }, theCapacity{ rhs.theCapacity }, objects{ nullptr } 
+		vector( const vector & rhs ) : theSize{ rhs.theSize }, 
+			theCapacity{ rhs.theCapacity }, objects{ nullptr } 
 		{
 			objects = new Object[ theCapacity ];
 			for( int k = 0; k < theSize; ++k )
 				objects[ k ] = rhs.objects[ k ];
 		}
 
-		Vector & operator= ( const Vector & rhs )
+		vector & operator= ( const vector & rhs )
 		{
-			Vector copy = rhs;
+			vector copy = rhs;
 			std::swap( *this, copy );
 			return *this;
 		}
 
-		~Vector()
-		{ delete [] objects; }
+		~vector() { delete [] objects; }
 
-		Vector( Vector && rhs ) : theSize{ rhs.theSize }, theCapacity{ rhs.theCapacity }, objects{ rhs.objects }
+		vector( vector && rhs ) noexcept : theSize{ rhs.theSize }, 
+			theCapacity{ rhs.theCapacity }, objects{ rhs.objects }
 		{
 			rhs.objects = nullptr;
 			rhs.theSize = 0;
 			rhs.theCapacity = 0;
 		}
 
-		Vector &operator= ( Vector && rhs )
+		vector &operator= ( vector && rhs ) noexcept
 		{
 			std::swap( theSize, rhs.theSize );
 			std::swap( theCapacity, rhs.theCapacity);
@@ -118,7 +122,7 @@ class Vector
 		const_iterator end( ) const
 		{ return &objects[ size() ]; }
 
-		static const int SPARE_CAPACITY = 16;
+		static constexpr short SPARE_CAPACITY = 16;
 
 	private:
 		int theSize;
@@ -126,4 +130,6 @@ class Vector
 		Object * objects;
 };
 
-#endif //VECTOR_H
+} // namespace experimental
+
+#endif //vector_H
