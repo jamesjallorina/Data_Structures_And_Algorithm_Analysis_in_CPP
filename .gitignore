@@ -3,4 +3,5 @@
 *.bak
 *.swp
 *.vs
+.vscode
 build

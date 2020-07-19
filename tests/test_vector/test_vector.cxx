@@ -1,9 +1,9 @@
 #include <iostream>
-#include "../../sources/vector_implementation/vector_implementation.hpp"
+#include "../../experimental/vector_implementation/vector.hpp"
 
 int main(int argc, char **argv)
 {
-	experimental::vector<int> vec;
+	experimental::vector_implementation::vector<int> vec;
 	/* test push back */
 	vec.push_back(1);
 	vec.push_back(2);
@@ -37,14 +37,14 @@ int main(int argc, char **argv)
 	std::cout << "vector size : " << vec.size() << std::endl;
 	std::cout << "vector capacity : " << vec.capacity() << std::endl;
 	std::cout << "test vector iterator " << std::endl;
-	experimental::vector<int>::iterator it;
+	experimental::vector_implementation::vector<int>::iterator it;
 	for(it = vec.begin(); it != vec.end(); ++it)
 		std::cout << *it << std::endl;
 	/* end */ 
 
 	/* test const_iterator */
 	std::cout << "test const iteator " << std::endl;
-	experimental::vector<int>::const_iterator cit;
+	experimental::vector_implementation::vector<int>::const_iterator cit;
 	for(cit = vec.begin(); cit != vec.end(); ++cit)
 	       std::cout << *cit << std::endl;	
 	/* end */ 
