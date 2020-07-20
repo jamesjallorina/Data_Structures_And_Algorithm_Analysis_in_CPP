@@ -109,8 +109,8 @@ namespace experimental {
 					return objects[ theSize - 1 ];
 				}
 
-				typedef Object * iterator;
-				typedef const Object * const_iterator;
+				using iterator = Object *;
+				using const_iterator = const Object *;
 
 				iterator begin( )
 				{ return &objects[ 0 ]; }
